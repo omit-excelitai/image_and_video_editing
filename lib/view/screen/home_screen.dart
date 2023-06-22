@@ -30,9 +30,10 @@ class HomeScreen extends StatelessWidget {
                   CircleAvatar(
                     child: IconButton(
                       onPressed:(){
-                        controller.pickImageFromGallery();
-                        if (controller.selectedImage.value != null) {
-                          Get.to(EditScreen(imageFile: controller.selectedImage.value!));
+                        controller.chooseImageFromGallery().obs;
+                        if (controller.chooseImage != null) {
+                          Get.to(()=>EditScreen(imageFile: controller.chooseImage!));
+                          print("Check ------- ${controller.selectedImage.value!}");
                         }
 
 
