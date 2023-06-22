@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'bottom_navbar_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home_screen';
   HomeScreen({super.key});
@@ -8,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: Text(
           'Home Screen',
@@ -21,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             height: 120.h,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.red
+              color: Color(0xFFd3f3f1)
             ),
           ),
         ),
