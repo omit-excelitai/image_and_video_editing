@@ -1,30 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColorResources {
-  static const Color buttonColor = Color(0xff453984);
+  static const Color appBackgroundColor = Colors.black;
   static const Color buttonColorBlue = Color(0xff39A5EF);
-  static const Color buttonColorRed = Color(0xffED3E3E);
-  static const Color buttonColorGreenAccent = Color(0xff1DC68C);
-  static const Color primaryWhite = Color(0xffFFFFFF);
-  static const Color secondaryBlackTextColor = Color(0xff5C5B63);
-  static const Color secondaryBlack54 = Color(0xffB6B6B6);
-  static const Color primaryBlueAccent = Color(0xffB6B6B6);
-  static const Color textFieldTextColor = Color(0xffCBCBCB);
-  static const Color shadowColor =
-      Color(0xff453984); // 10% Opacity // 20% Opacity
-  static const Color appBarColor = Color(0xffF8F6FF);
-  static const Color scaffoldBgColor = Color(0xffffffff);
-  static const Color appBarActionColor = Color(0xffADADAD);
-  static const Color tableHeaderColor = Color(0xffECEBF3);
-  static const Color tableColumColor = Color(0xffEBF6FD);
-  static const Color appDrawerColor = Color(0xff453984);
-  static const Color cardBackgroundColor = Color(0XFFF4F4FF);
-  static const Color disableSwitchColor = Color(0xffA9A9A9);
-  static const Color enableSwitchColor = Color(0xffD3CCFA);
-  static const Color borderColor = Color(0xffEFECFF);
-  static const Color drawerItemColor = Color(0xff646464);
-  static const Color primaryBlack = Color(0xff000000);
-  static const Color primaryOrange = Colors.orange;
 
   /// Map Color
   static const Map<int, Color> colorMap = {
