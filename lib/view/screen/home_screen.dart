@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_and_video_editing/controller/home_screen_controller.dart';
 
+import '../../utils/app_color_resources.dart';
+import 'bottom_navbar_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home_screen';
@@ -12,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColorResources.scaffoldBgColor,
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 50.0.w),

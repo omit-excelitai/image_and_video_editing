@@ -33,12 +33,13 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
-            home: BottomNavBarScreen(),
+            initialRoute: BottomNavBarScreen.routeName,
             getPages: [
               GetPage(name: HomeScreen.routeName, page: () => HomeScreen()),
               GetPage(name: ViewScreen.routeName, page: () => ViewScreen()),
               GetPage(name: EditScreen.routeName, page: () => EditScreen()),
               GetPage(name: AddProjectScreen.routeName, page: () => AddProjectScreen()),
+              GetPage(name: BottomNavBarScreen.routeName, page: () => BottomNavBarScreen()),
             ],
           );
         });
