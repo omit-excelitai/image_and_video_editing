@@ -11,12 +11,6 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar: AppBar(
-        title: Text(
-          'Home Screen',
-        ),
-        centerTitle: true,
-      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 50.0.w),
@@ -24,8 +18,16 @@ class HomeScreen extends StatelessWidget {
             height: 120.h,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Color(0xFFd3f3f1)
+              color: Color(0xFFd3f3f1),
+
             ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(child: IconButton(onPressed: (){}, icon: Icon(Icons.add))),
+                Text('Add files',style: TextStyle(color: Colors.purple),)
+              ],
+            )
           ),
         ),
       ),
