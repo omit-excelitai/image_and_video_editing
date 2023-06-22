@@ -43,6 +43,9 @@ dependencies:
   get_it:
   http:
   shared_preferences: ^2.1.2
+  video_player: ^2.6.1
+  path_provider: ^2.0.15
+  image_picker: ^0.8.9
 
 dev_dependencies:
   flutter_test:
