@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:image_and_video_editing/controller/home_screen_controller.dart';
-
 import '../../utils/app_color_resources.dart';
-import 'bottom_navbar_screen.dart';
+import 'edit_screen.dart';
+
 
 class HomeScreen extends StatelessWidget {
   static const String routeName = '/home_screen';
@@ -31,7 +30,17 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     child: IconButton(
-                      onPressed: controller.pickImageFromGallery,
+                      onPressed:(){
+                        controller.pickImageFromGallery();
+                        if (controller.selectedImage.value != null) {
+                          Get.to(EditScreen(imageFile: controller.selectedImage.value!));
+                        }
+
+
+                    },
+
+
+
                       icon: Icon(Icons.add),
                     ),
                   ),

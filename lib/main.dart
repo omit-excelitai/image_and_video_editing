@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
             getPages: [
               GetPage(name: HomeScreen.routeName, page: () => HomeScreen()),
               GetPage(name: ViewScreen.routeName, page: () => ViewScreen()),
-              GetPage(name: EditScreen.routeName, page: () => EditScreen()),
+              //GetPage(name: EditScreen.routeName, page: () => EditScreen(imageFile: nu,)),
               GetPage(name: AddProjectScreen.routeName, page: () => AddProjectScreen()),
               GetPage(name: BottomNavBarScreen.routeName, page: () => BottomNavBarScreen()),
             ],
