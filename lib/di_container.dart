@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_and_video_editing/controller/home_screen_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'controller/add_project_screen_controller.dart';
+import 'controller/bottom_navbar_controller.dart';
+import 'controller/edit_screen_controller.dart';
+import 'controller/view_screen_controller.dart';
 import 'data/datasource/remote/dio/logging_interceptor.dart';
 
 final sl = GetIt.instance;
@@ -17,6 +21,10 @@ Future<void> init() async {
   /// Controller
   //Get.lazyPut(() => SplashController(), fenix: true);
   Get.lazyPut(() => HomeScreenController(), fenix: true);
+  Get.lazyPut(() => BottomNavController(), fenix: true);
+  Get.lazyPut(() => AddProjectScreenController(), fenix: true);
+  Get.lazyPut(() => ViewScreenController(), fenix: true);
+  Get.lazyPut(() => EditScreenController(), fenix: true);
 
 
   /// External pocket lock
