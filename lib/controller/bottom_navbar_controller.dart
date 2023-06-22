@@ -8,10 +8,10 @@ import '../view/screen/home_screen.dart';
 
 class BottomNavController extends GetxController {
   int selectedIndex = 0;
-  List<String> titles = ['Home', 'Add', 'View'];
+  List<String> titles = ['Add New Project', 'Home', 'View Videos'];
   List<Widget> screens = [
-    HomeScreen(),
     AddProjectScreen(),
+    HomeScreen(),
     ViewScreen()
   ];
 
