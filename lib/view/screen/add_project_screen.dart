@@ -29,13 +29,13 @@ class AddProjectScreen extends StatelessWidget {
                     init: AddProjectScreenController(),
                     builder: (controller) {
                       return InkWell(
-                        onTap: () {
-                          controller.chooseImageFromGallery();
-                          if (controller.chooseImage != null) {
-                            Get.to(() =>
-                                EditScreen(imageFile: controller.chooseImage!));
-                            print(
-                                "Check ------- ${controller.selectedImage.value!}");
+                        onTap: () async {
+                          await controller.pickImageFromGallery();
+                          final imagePath = controller.chooseImage.value;
+                          if (imagePath.isNotEmpty) {
+                            await Get.to(
+                                () => EditScreen(imageFile: imagePath));
+                            print("Check ------- ${imagePath}");
                           }
                         },
                         child: Container(
