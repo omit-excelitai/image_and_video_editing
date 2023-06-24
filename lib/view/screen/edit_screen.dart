@@ -1,24 +1,29 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:image_and_video_editing/controller/add_project_screen_controller.dart';
 
 class EditScreen extends StatelessWidget {
-  final String? imageFile;
+  final File? file;
   static const String routeName = '/edit_screen';
-  EditScreen({Key? key, this.imageFile}) : super(key: key);
+  EditScreen({Key? key, this.file}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.file(File(imageFile!)),
-          ],
-        ),
+        child: GetBuilder<AddProjectScreenController>(
+            init: AddProjectScreenController(),
+            builder: (controller) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.file(file!),
+                ],
+              );
+            }),
       ),
     );
   }
