@@ -12,19 +12,13 @@ class BottomNavBarScreen extends StatelessWidget {
     return GetBuilder<BottomNavController>(
       init: BottomNavController(),
       builder: (controller) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            controller.title,
-            style: TextStyle(color: AppColorResources.primaryBlack),
-          ),
-        ),
         body: controller.currentScreen,
         floatingActionButton: FloatingActionButton(
           shape: CircleBorder(),
           backgroundColor: AppColorResources.enableSwitchColor,
           isExtended: true,
           child: Icon(Icons.add_circle_outline_outlined,
-              color: AppColorResources.primaryBlack),
+              color: AppColorResources.buttonColor),
           onPressed: () {
             controller.changeScreen(0);
           },

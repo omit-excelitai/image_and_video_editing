@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:image_and_video_editing/utils/app_style.dart';
 import 'package:image_and_video_editing/view/screen/edit_screen.dart';
 import '../../controller/add_project_screen_controller.dart';
-import '../../controller/home_screen_controller.dart';
 import '../../utils/app_color_resources.dart';
+import '../widgets/reusable_app_bar.dart';
 
 class AddProjectScreen extends StatelessWidget {
   static const String routeName = '/add_project_screen';
@@ -14,6 +15,9 @@ class AddProjectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColorResources.scaffoldBgColor,
+      appBar: ReusableAppBar(
+        title: 'Add New Project',
+      ),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 50.0.w),
@@ -21,39 +25,58 @@ class AddProjectScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  height: 120.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFd3f3f1),
-                  ),
-                  child: GetBuilder<AddProjectScreenController>(
+                GetBuilder<AddProjectScreenController>(
                     init: AddProjectScreenController(),
-                    builder: (controller) => Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          child: IconButton(
-                            onPressed: () {
-                              controller.chooseImageFromGallery().obs;
-                              if (controller.chooseImage != null) {
-                                Get.to(() => EditScreen(
-                                    imageFile: controller.chooseImage!));
-                                print(
-                                    "Check ------- ${controller.selectedImage.value!}");
-                              }
-                            },
-                            icon: Icon(Icons.add),
+                    builder: (controller) {
+                      return InkWell(
+                        onTap: () {
+                          controller.chooseImageFromGallery();
+                          if (controller.chooseImage != null) {
+                            Get.to(() =>
+                                EditScreen(imageFile: controller.chooseImage!));
+                            print(
+                                "Check ------- ${controller.selectedImage.value!}");
+                          }
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          height: 120.h,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(1, 3),
+                                color: AppColorResources.buttonColor,
+                                blurRadius: 3,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(10.r),
+                            gradient: LinearGradient(
+                              colors: [Colors.purple, Colors.blueAccent],
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CircleAvatar(
+                                child: Icon(Icons.add),
+                                backgroundColor:
+                                    AppColorResources.enableSwitchColor,
+                              ),
+                              Text(
+                                'Add New Project',
+                                style: myStyleInter(
+                                    16.sp,
+                                    AppColorResources.primaryWhite,
+                                    FontWeight.w600),
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          'Add files',
-                          style: TextStyle(color: Colors.purple),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      );
+                    }),
               ],
             ),
           ),
