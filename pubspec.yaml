@@ -46,7 +46,6 @@ dependencies:
   video_player: ^2.6.1
   path_provider: ^2.0.15
   image_picker: ^0.8.9
-  ffmpeg_kit_flutter: ^5.1.0
 
 dev_dependencies:
   flutter_test:
