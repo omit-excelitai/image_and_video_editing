@@ -6,10 +6,11 @@ import 'package:image_and_video_editing/view/screen/add_project_screen.dart';
 import 'package:image_and_video_editing/view/screen/edit_screen.dart';
 import 'package:image_and_video_editing/view/screen/bottom_navbar_screen.dart';
 import 'package:image_and_video_editing/view/screen/home_screen.dart';
+import 'package:image_and_video_editing/view/screen/test_video_edit.dart';
 import 'package:image_and_video_editing/view/screen/view_screen.dart';
 import 'di_container.dart' as di;
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
   runApp(const MyApp());
@@ -33,13 +34,18 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
               useMaterial3: true,
             ),
+            //home: VideoEditingScreen(),
             initialRoute: BottomNavBarScreen.routeName,
             getPages: [
               GetPage(name: HomeScreen.routeName, page: () => HomeScreen()),
               GetPage(name: ViewScreen.routeName, page: () => ViewScreen()),
-              //GetPage(name: EditScreen.routeName, page: () => EditScreen(imageFile: nu,)),
-              GetPage(name: AddProjectScreen.routeName, page: () => AddProjectScreen()),
-              GetPage(name: BottomNavBarScreen.routeName, page: () => BottomNavBarScreen()),
+              GetPage(name: EditScreen.routeName, page: () => EditScreen()),
+              GetPage(
+                  name: AddProjectScreen.routeName,
+                  page: () => AddProjectScreen()),
+              GetPage(
+                  name: BottomNavBarScreen.routeName,
+                  page: () => BottomNavBarScreen()),
             ],
           );
         });

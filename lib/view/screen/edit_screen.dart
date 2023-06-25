@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:image_and_video_editing/controller/add_project_screen_controller.dart';
+import 'package:image_and_video_editing/controller/video_editing_controller.dart';
+import 'package:image_and_video_editing/utils/app_color_resources.dart';
+import 'package:video_player/video_player.dart';
 
 class EditScreen extends StatelessWidget {
   final File? file;
@@ -12,16 +13,31 @@ class EditScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColorResources.scaffoldBgColor,
       body: Padding(
         padding: EdgeInsets.all(20),
-        child: GetBuilder<AddProjectScreenController>(
-            init: AddProjectScreenController(),
+        child: GetBuilder<VideoEditingController>(
+            init: VideoEditingController(),
             builder: (controller) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.file(file!),
-                ],
+              final videoController = controller.videoController;
+              final pickImage = controller.pickImage;
+              print('check image path -----------$pickImage');
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    videoController != null
+                        ? AspectRatio(
+                            aspectRatio: videoController.value.aspectRatio,
+                            child: VideoPlayer(videoController),
+                          )
+                        : pickImage != null
+                            ? Container(
+                                child: pickImage,
+                              )
+                            : SizedBox.shrink(),
+                  ],
+                ),
               );
             }),
       ),

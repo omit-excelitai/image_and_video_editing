@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'controller/add_project_screen_controller.dart';
 import 'controller/bottom_navbar_controller.dart';
 import 'controller/edit_screen_controller.dart';
+import 'controller/video_editing_controller.dart';
 import 'controller/view_screen_controller.dart';
 import 'data/datasource/remote/dio/logging_interceptor.dart';
 
@@ -25,6 +26,7 @@ Future<void> init() async {
   Get.lazyPut(() => AddProjectScreenController(), fenix: true);
   Get.lazyPut(() => ViewScreenController(), fenix: true);
   Get.lazyPut(() => EditScreenController(), fenix: true);
+  Get.lazyPut(() => VideoEditingController(), fenix: true);
 
 
   /// External pocket lock

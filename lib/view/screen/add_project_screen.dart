@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_and_video_editing/utils/app_style.dart';
 import 'package:image_and_video_editing/view/screen/edit_screen.dart';
-import '../../controller/add_project_screen_controller.dart';
+import '../../controller/video_editing_controller.dart';
 import '../../utils/app_color_resources.dart';
 import '../widgets/reusable_app_bar.dart';
 
@@ -25,17 +25,17 @@ class AddProjectScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GetBuilder<AddProjectScreenController>(
-                    init: AddProjectScreenController(),
+                GetBuilder<VideoEditingController>(
+                    init: VideoEditingController(),
                     builder: (controller) {
                       return InkWell(
                         onTap: () async {
-                          // await controller.pickImageFromGallery();
-                          // final imagePath = controller.chooseImage.value;
-                          // if (imagePath.isNotEmpty) {
-                          //   await Get.to(
-                          //       () => EditScreen(imageFile: imagePath));
                           await controller.pickImageOrVideo();
+                          final imagePath = controller.pickImage;
+                          final videoPath = controller.videoController;
+                          if (imagePath != null || videoPath != null) {
+                            await Get.to(() => EditScreen());
+                          }
                         },
                         child: Container(
                           padding: EdgeInsets.symmetric(vertical: 10.h),
