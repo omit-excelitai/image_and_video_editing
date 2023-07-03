@@ -23,7 +23,7 @@ class ViewScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(
+            padding: EdgeInsets.symmetric(
                 horizontal: 30.0, vertical: 25.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -33,7 +33,7 @@ class ViewScreen extends StatelessWidget {
                   icon: const Icon(
                     Icons.favorite_border,
                     color: Colors.white,
-                    size: 50,
+                    size: 20,
                   ),
                 ),
                 const Padding(
@@ -149,18 +149,19 @@ class ViewScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  const SizedBox(width: 70),
+                  SizedBox(width: 20),
                   Container(
-                    width: 90,
+                    width: 50,
+                    height: 30,
                     child: FloatingActionButton.extended(
-                      backgroundColor:  const Color.fromARGB(250, 253, 77, 61),
+                      backgroundColor:  Color.fromARGB(250, 253, 77, 61),
                       onPressed: (){}, label: const Text('Use'),),),
                 ],
               ),
 
             ],
           ),
-          const SizedBox(height: 20,),
+          SizedBox(height: 20,),
         ],
       ),
     ),
@@ -323,12 +324,14 @@ class ViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColorResources.scaffoldBgColor,
-      body: PageView(
-        scrollDirection: Axis.vertical,
-        controller: controller,
-        children: scrollingImages,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColorResources.scaffoldBgColor,
+        body: PageView(
+          scrollDirection: Axis.vertical,
+          controller: controller,
+          children: scrollingImages,
+        ),
       ),
     );
   }
