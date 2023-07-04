@@ -50,3 +50,26 @@ class MyApp extends StatelessWidget {
         });
   }
 }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:image_and_video_editing/view/screen/audio_player_page.dart';
+//
+// void main() {
+//   runApp(MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       title: 'Image with Music',
+//       theme: ThemeData(
+//         primarySwatch: Colors.blue,
+//       ),
+//       home: ImageWithMusic(),
+//     );
+//   }
+// }
+
