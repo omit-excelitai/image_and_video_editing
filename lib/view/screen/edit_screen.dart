@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -63,18 +64,13 @@ class _EditScreenState extends State<EditScreen> {
   /// For Rotate Image or Video
   rotateRightAngle() {
     setState(() {
-        rotationAngle += 0.5;
+        rotationAngle += pi/2;
     });
   }
 
   rotateLeftAngle() {
     setState(() {
-      if(rotationAngle == 90){
-        rotationAngle = -90;
-      }else{
-        rotationAngle = 0.0;
-      }
-
+      rotationAngle -= pi/2;
     });
   }
 
