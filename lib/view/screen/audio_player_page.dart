@@ -87,72 +87,75 @@ class _ImageWithMusicState extends State<ImageWithMusic> {
   }
 }
 
-// import 'package:audioplayers/audioplayers.dart';
-// import 'package:flutter/material.dart';
-//
-// class ImageWithBackgroundMusic extends StatefulWidget {
-//   @override
-//   _ImageWithBackgroundMusicState createState() =>
-//       _ImageWithBackgroundMusicState();
-// }
-//
-// class _ImageWithBackgroundMusicState extends State<ImageWithBackgroundMusic> {
-//   AudioPlayer audioPlayer = AudioPlayer();
-//   String audioUrl = 'assets/audios/audio.mp3';
-//   String imageUrl = 'assets/images/1.png';
-//   Source source = AssetSource("assets/audios/audio.mp3");
-//   PlayerState audioPlayerState = PlayerState.stopped;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     playBackgroundMusic();
-//   }
-//
-//   @override
-//   void dispose() {
-//     audioPlayer.release();
-//     audioPlayer.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Image with Background Music'),
-//       ),
-//       body: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           Image.asset(imageUrl),
-//           ElevatedButton(
-//             child: Text('Stop Music'),
-//             onPressed: () {
-//               stopBackgroundMusic();
-//             },
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   playBackgroundMusic() async {
-//     audioPlayer.play(
-//       source,
-//       volume: 5,
-//       mode: PlayerMode.mediaPlayer,
-//     );
-//
-//     setState(() {
-//       audioPlayerState = PlayerState.playing;
-//     });
-//   }
-//
-//   stopBackgroundMusic() async {
-//     await audioPlayer.stop();
-//     setState(() {
-//       audioPlayerState = PlayerState.stopped;
-//     });
-//   }
-// }
+
+
+
+// // import 'package:audioplayers/audioplayers.dart';
+// // import 'package:flutter/material.dart';
+// //
+// // class ImageWithBackgroundMusic extends StatefulWidget {
+// //   @override
+// //   _ImageWithBackgroundMusicState createState() =>
+// //       _ImageWithBackgroundMusicState();
+// // }
+// //
+// // class _ImageWithBackgroundMusicState extends State<ImageWithBackgroundMusic> {
+// //   AudioPlayer audioPlayer = AudioPlayer();
+// //   String audioUrl = 'assets/audios/audio.mp3';
+// //   String imageUrl = 'assets/images/1.png';
+// //   Source source = AssetSource("assets/audios/audio.mp3");
+// //   PlayerState audioPlayerState = PlayerState.stopped;
+// //
+// //   @override
+// //   void initState() {
+// //     super.initState();
+// //     playBackgroundMusic();
+// //   }
+// //
+// //   @override
+// //   void dispose() {
+// //     audioPlayer.release();
+// //     audioPlayer.dispose();
+// //     super.dispose();
+// //   }
+// //
+// //   @override
+// //   Widget build(BuildContext context) {
+// //     return Scaffold(
+// //       appBar: AppBar(
+// //         title: Text('Image with Background Music'),
+// //       ),
+// //       body: Column(
+// //         mainAxisAlignment: MainAxisAlignment.center,
+// //         children: [
+// //           Image.asset(imageUrl),
+// //           ElevatedButton(
+// //             child: Text('Stop Music'),
+// //             onPressed: () {
+// //               stopBackgroundMusic();
+// //             },
+// //           ),
+// //         ],
+// //       ),
+// //     );
+// //   }
+// //
+// //   playBackgroundMusic() async {
+// //     audioPlayer.play(
+// //       source,
+// //       volume: 5,
+// //       mode: PlayerMode.mediaPlayer,
+// //     );
+// //
+// //     setState(() {
+// //       audioPlayerState = PlayerState.playing;
+// //     });
+// //   }
+// //
+// //   stopBackgroundMusic() async {
+// //     await audioPlayer.stop();
+// //     setState(() {
+// //       audioPlayerState = PlayerState.stopped;
+// //     });
+// //   }
+// // }

@@ -8,11 +8,13 @@ class VideoEditingController extends GetxController {
   VideoPlayerController? videoController;
   ImagePicker picker = ImagePicker();
   dynamic pickImage;
+  dynamic pickedFileX;
 
 
   /// For Pick Image or Video
   pickImageOrVideo() async {
     final pickedFile = await picker.pickMedia();
+    pickedFileX = pickedFile!.path;
     if (pickedFile != null) {
       if (pickedFile.path.endsWith('.jpg') ||
           pickedFile.path.endsWith('.jpeg') ||

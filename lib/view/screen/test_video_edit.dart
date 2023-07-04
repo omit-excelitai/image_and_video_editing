@@ -24,7 +24,6 @@ class VideoEditingScreen extends StatelessWidget {
                   builder: (controller) {
                     final videoController = controller.videoController;
                     final pickImage = controller.pickImage;
-                    print('check image path -----------$pickImage');
                     // if (pickImage == null || videoController == null) {
                     //   return Container();
                     // } else {

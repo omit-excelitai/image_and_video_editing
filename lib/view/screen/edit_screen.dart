@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:image_and_video_editing/controller/video_editing_controller.dart';
 import 'package:image_and_video_editing/utils/app_color_resources.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:video_player/video_player.dart';
 import '../widgets/reusable_editor_button.dart';
 
@@ -20,6 +21,8 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
+  CroppedFile? _croppedFile;
+
   AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Source source = AssetSource('audios/audio.mp3');
@@ -72,6 +75,33 @@ class _EditScreenState extends State<EditScreen> {
     setState(() {
       rotationAngle -= pi / 2;
     });
+  }
+
+  final videoEditingController = Get.find<VideoEditingController>();
+
+  /// crop image
+  croppedImage() async {
+    if (videoEditingController.pickedFileX != null) {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: videoEditingController.pickedFileX,
+        compressFormat: ImageCompressFormat.jpg,
+        compressQuality: 100,
+        uiSettings: [
+          AndroidUiSettings(
+            toolbarTitle: 'Cropper',
+            toolbarColor: Colors.deepOrange,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.original,
+            lockAspectRatio: false,
+          ),
+        ],
+      );
+      if (croppedFile != null) {
+        setState(() {
+          _croppedFile = croppedFile;
+        });
+      }
+    }
   }
 
   @override
@@ -223,7 +253,9 @@ class _EditScreenState extends State<EditScreen> {
                 width: 10.w,
               ),
               ReusableEditorButton(
-                onTap: () {},
+                onTap: () {
+                  croppedImage();
+                },
                 icon: Icons.crop,
               ),
               SizedBox(
