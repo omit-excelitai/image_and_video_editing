@@ -6,10 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:image_and_video_editing/controller/video_editing_controller.dart';
 import 'package:image_and_video_editing/utils/app_color_resources.dart';
-import 'package:image_and_video_editing/view/widgets/reusable_app_bar.dart';
 import 'package:video_player/video_player.dart';
-
-import '../widgets/bottom_navbar_widget.dart';
 import '../widgets/reusable_editor_button.dart';
 
 class EditScreen extends StatefulWidget {
@@ -203,14 +200,28 @@ class _EditScreenState extends State<EditScreen> {
                         ),
                         ReusableEditorButton(
                           onTap: () {},
-                          icon: Icons.adjust,
+                          icon: Icons.crop,
                         ),
                         SizedBox(
                           width: 10.w,
                         ),
                         ReusableEditorButton(
                           onTap: () {},
-                          icon: Icons.crop,
+                          icon: Icons.brush_outlined,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.color_lens_outlined,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.adjust,
                         ),
                         SizedBox(
                           width: 10.w,
