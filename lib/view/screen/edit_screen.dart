@@ -116,132 +116,127 @@ class _EditScreenState extends State<EditScreen> {
             final pickImage = controller.pickImage;
             print('check image path -----------$pickImage');
 
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: Expanded(
-                      child: Column(
-                        children: [
-                          Container(
-                            child: videoController != null
-                                ? AspectRatio(
-                                    aspectRatio: videoController.value.aspectRatio,
-                                    child: VideoPlayer(videoController),
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      Container(
+                        child: videoController != null
+                            ? AspectRatio(
+                                aspectRatio: videoController.value.aspectRatio,
+                                child: VideoPlayer(videoController),
+                              )
+                            : pickImage != null
+                                ? Container(
+                                    child: pickImage,
                                   )
-                                : pickImage != null
-                                    ? Container(
-                                        child: pickImage,
-                                      )
-                                    : SizedBox.shrink(),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          IconButton(
-                            icon: isPlaying
-                                ? Icon(Icons.pause)
-                                : Icon(Icons.play_arrow),
-                            onPressed: () {
-                              if (isPlaying) {
-                                pauseAudio();
-                              } else {
-                                playMusic();
-                              }
-                            },
-                            iconSize: 50.0,
-                            color: Colors.blue,
-                          ),
-                        ],
+                                : SizedBox.shrink(),
                       ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      IconButton(
+                        icon: isPlaying
+                            ? Icon(Icons.pause)
+                            : Icon(Icons.play_arrow),
+                        onPressed: () {
+                          if (isPlaying) {
+                            pauseAudio();
+                          } else {
+                            playMusic();
+                          }
+                        },
+                        iconSize: 50.0,
+                        color: Colors.blue,
+                      ),
+                    ],
+                  ),
+                ),
+
+                /// Footer
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                  color: AppColorResources.primaryBlack,
+                  //height: 65.h,
+                  width: double.infinity,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: [
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.text_fields,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.music_note_sharp,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.filter,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.rotate_left_outlined,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.rotate_right_outlined,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.adjust,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.crop,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        ReusableEditorButton(
+                          onTap: () {},
+                          icon: Icons.emoji_emotions_outlined,
+                        ),
+
+                        // BottomNavBarWidget(iconData: Icons.text_fields,onTap: (){
+                        // },),
+                        // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){
+                        //
+                        // },),
+                        // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
+                        // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
+                      ],
                     ),
                   ),
-
-                  /// Footer
-                  Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
-                    color: AppColorResources.primaryBlack,
-                    //height: 65.h,
-                    width: double.infinity,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.text_fields,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.music_note_sharp,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.filter,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.rotate_left_outlined,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.rotate_right_outlined,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.adjust,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.crop,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          ReusableEditorButton(
-                            onTap: () {},
-                            icon: Icons.emoji_emotions_outlined,
-                          ),
-
-                          // BottomNavBarWidget(iconData: Icons.text_fields,onTap: (){
-                          // },),
-                          // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){
-                          //
-                          // },),
-                          // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
-                          // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             );
           }),
     );
