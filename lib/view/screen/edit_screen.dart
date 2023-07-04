@@ -22,6 +22,7 @@ class _EditScreenState extends State<EditScreen> {
   AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
   Source source = AssetSource('audios/audio.mp3');
+  double rotationAngle = 0.0;
 
   @override
   void initState() {
@@ -40,6 +41,7 @@ class _EditScreenState extends State<EditScreen> {
     super.initState();
   }
 
+  /// For Play Music
   playMusic() async {
     audioPlayer.play(
       source,
@@ -48,12 +50,32 @@ class _EditScreenState extends State<EditScreen> {
     );
   }
 
+  /// For Pause Audio
   pauseAudio() async {
     await audioPlayer.pause();
   }
 
+  /// For Stop Audio
   stopAudio() async {
     await audioPlayer.stop();
+  }
+
+  /// For Rotate Image or Video
+  rotateRightAngle() {
+    setState(() {
+        rotationAngle += 0.5;
+    });
+  }
+
+  rotateLeftAngle() {
+    setState(() {
+      if(rotationAngle == 90){
+        rotationAngle = -90;
+      }else{
+        rotationAngle = 0.0;
+      }
+
+    });
   }
 
   @override
@@ -126,8 +148,11 @@ class _EditScreenState extends State<EditScreen> {
                                 child: VideoPlayer(videoController),
                               )
                             : pickImage != null
-                                ? Container(
-                                    child: pickImage,
+                                ? Transform.rotate(
+                                    angle: rotationAngle,
+                                    child: Container(
+                                      child: pickImage,
+                                    ),
                                   )
                                 : SizedBox.shrink(),
                       ),
@@ -185,14 +210,18 @@ class _EditScreenState extends State<EditScreen> {
                           width: 10.w,
                         ),
                         ReusableEditorButton(
-                          onTap: () {},
+                          onTap: () {
+                            rotateLeftAngle();
+                          },
                           icon: Icons.rotate_left_outlined,
                         ),
                         SizedBox(
                           width: 10.w,
                         ),
                         ReusableEditorButton(
-                          onTap: () {},
+                          onTap: () {
+                            rotateRightAngle();
+                          },
                           icon: Icons.rotate_right_outlined,
                         ),
                         SizedBox(
