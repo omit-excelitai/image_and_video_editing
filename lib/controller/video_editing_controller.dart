@@ -9,9 +9,33 @@ class VideoEditingController extends GetxController {
   ImagePicker picker = ImagePicker();
   dynamic pickImage;
   dynamic pickedFileX;
+  List<String> selectedEmojis = [];
 
+  ///..................previous right code ..............
+  // /// For Pick Image or Video
+  // pickImageOrVideo() async {
+  //   final pickedFile = await picker.pickMedia();
+  //   pickedFileX = pickedFile!.path;
+  //   if (pickedFile != null) {
+  //     if (pickedFile.path.endsWith('.jpg') ||
+  //         pickedFile.path.endsWith('.jpeg') ||
+  //         pickedFile.path.endsWith('.png')) {
+  //       pickImage = Image.file(File(pickedFile.path));
+  //       update();
+  //     } else if (pickedFile.path.endsWith('.mp4') ||
+  //         pickedFile.path.endsWith('.mov')) {
+  //       videoController = VideoPlayerController.file(File(pickedFile.path));
+  //       await videoController!.initialize();
+  //       videoController!.setLooping(true);
+  //       videoController!.play();
+  //       update();
+  //     }
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
-  /// For Pick Image or Video
+  /// ...........add emoji,
   pickImageOrVideo() async {
     final pickedFile = await picker.pickMedia();
     pickedFileX = pickedFile!.path;
@@ -19,6 +43,7 @@ class VideoEditingController extends GetxController {
       if (pickedFile.path.endsWith('.jpg') ||
           pickedFile.path.endsWith('.jpeg') ||
           pickedFile.path.endsWith('.png')) {
+         selectedEmojis.clear();
         pickImage = Image.file(File(pickedFile.path));
         update();
       } else if (pickedFile.path.endsWith('.mp4') ||
@@ -34,7 +59,6 @@ class VideoEditingController extends GetxController {
     }
   }
 
-
   /// For Trim Video
   void trimVideo(Duration start, Duration end) {
     // Perform the trimming operation using the start and end durations
@@ -47,3 +71,5 @@ class VideoEditingController extends GetxController {
     super.onClose();
   }
 }
+
+

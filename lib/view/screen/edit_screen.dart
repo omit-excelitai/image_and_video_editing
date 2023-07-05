@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ import 'package:image_and_video_editing/utils/app_color_resources.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:video_player/video_player.dart';
 import '../widgets/reusable_editor_button.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 class EditScreen extends StatefulWidget {
   final File? file;
@@ -111,6 +113,37 @@ class _EditScreenState extends State<EditScreen> {
     super.dispose();
   }
 
+
+
+
+
+
+
+
+  ///.......emoji...............................
+
+  void openEmojiPicker() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return EmojiPicker(
+          onEmojiSelected: (Category? category, Emoji emoji) {
+            setState(() {
+              videoEditingController.selectedEmojis.add(emoji.emoji);
+              Navigator.pop(context); // Close the emoji picker
+            });
+          },
+        );
+      },
+    );
+  }
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -156,56 +189,119 @@ class _EditScreenState extends State<EditScreen> {
       /// Body
       body: GetBuilder<VideoEditingController>(
           init: VideoEditingController(),
-          builder: (controller) {
-            final videoController = controller.videoController;
-            final pickImage = controller.pickImage;
-            print('check image path -----------$pickImage');
 
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Transform.rotate(
-                    angle: rotationAngle,
-                    child: Container(
-                      child: videoController != null
-                          ? AspectRatio(
-                        aspectRatio:
-                        videoController.value.aspectRatio,
-                        child: VideoPlayer(videoController),
-                      )
-                          : pickImage != null
-                          ? Container(
-                        child: pickImage,
-                      )
-                          : SizedBox.shrink(),
-                    ),
+
+          ///......multipule emoji select...
+        builder: (controller) {
+          final videoController = controller.videoController;
+          print('check image path -----------${controller.pickedFileX}');
+
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Transform.rotate(
+                  angle: rotationAngle,
+                  child: Container(
+                    child: videoController != null
+                        ? AspectRatio(
+                      aspectRatio: videoController.value.aspectRatio,
+                      child: VideoPlayer(videoController),
+                    )
+                        : controller.pickImage != null
+                        ? Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        controller.pickImage,
+                        Column(
+                          children: controller.selectedEmojis.map((emoji) {
+                            return Text(
+                              emoji,
+                              style: TextStyle(fontSize: 50),
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    )
+                        : SizedBox.shrink(),
                   ),
-                  SizedBox(
-                    height: 10.h,
-                  ),
-                  IconButton(
-                    icon: isPlaying
-                        ? Icon(Icons.pause)
-                        : Icon(Icons.play_arrow),
-                    onPressed: () {
-                      if (isPlaying) {
-                        pauseAudio();
-                      } else {
-                        playMusic();
-                      }
-                    },
-                    iconSize: 50.0,
-                    color: Colors.blue,
-                  ),
-                ],
-              ),
-            );
-          }),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                IconButton(
+                  icon: isPlaying
+                      ? Icon(Icons.pause)
+                      : Icon(Icons.play_arrow),
+                  onPressed: () {
+                    if (isPlaying) {
+                      pauseAudio();
+                    } else {
+                      playMusic();
+                    }
+                  },
+                  iconSize: 50.0,
+                  color: Colors.blue,
+                ),
+              ],
+            ),
+          );
+        }),
+
+
+
+
+        // old code
+        // builder: (controller) {
+        //     final videoController = controller.videoController;
+        //     final pickImage = controller.pickImage;
+        //     print('check image path -----------$pickImage');
+        //
+        //     return SingleChildScrollView(
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.start,
+        //         children: [
+        //           Transform.rotate(
+        //             angle: rotationAngle,
+        //             child: Container(
+        //               child: videoController != null
+        //                   ? AspectRatio(
+        //                       aspectRatio: videoController.value.aspectRatio,
+        //                       child: VideoPlayer(videoController),
+        //                     )
+        //                   : pickImage != null
+        //                       ? Container(
+        //                           child: pickImage,
+        //                         )
+        //                       : SizedBox.shrink(),
+        //             ),
+        //           ),
+        //           SizedBox(
+        //             height: 10.h,
+        //           ),
+        //           IconButton(
+        //             icon:
+        //                 isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+        //             onPressed: () {
+        //               if (isPlaying) {
+        //                 pauseAudio();
+        //               } else {
+        //                 playMusic();
+        //               }
+        //             },
+        //             iconSize: 50.0,
+        //             color: Colors.blue,
+        //           ),
+        //         ],
+        //       ),
+        //     );
+        //   }),
+
+
+
       /// Footer
       bottomNavigationBar: Container(
-        padding:
-        EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+        padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         color: AppColorResources.primaryBlack,
         //height: 65.h,
         width: double.infinity,
@@ -279,26 +375,23 @@ class _EditScreenState extends State<EditScreen> {
                 onTap: () {},
                 icon: Icons.adjust,
               ),
+
+
+
+
+
+
+              //............................ emoji...................
               SizedBox(
                 width: 10.w,
               ),
               ReusableEditorButton(
-                onTap: () {},
+                onTap: () {
+                  openEmojiPicker();
+                },
                 icon: Icons.emoji_emotions_outlined,
               ),
 
-              // BottomNavBarWidget(iconData: Icons.text_fields,onTap: (){
-              // },),
-              // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){
-              //
-              // },),
-              // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.music_note_sharp,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.filter,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.adjust,onTap: (){},),
-              // BottomNavBarWidget(iconData: Icons.emoji_emotions,onTap: (){},),
             ],
           ),
         ),
@@ -307,112 +400,4 @@ class _EditScreenState extends State<EditScreen> {
   }
 }
 
-// class EditScreen extends StatefulWidget {
-//   final File? file;
-//   static const String routeName = '/edit_screen';
-//   EditScreen({Key? key, this.file}) : super(key: key);
-//
-//   @override
-//   _EditScreenState createState() => _EditScreenState();
-// }
-//
-// class _EditScreenState extends State<EditScreen> {
-//   int selectedContainerIndex = -1; // Index of the selected container
-//   List<Color> containerColors = List.filled(2, Colors.transparent); // List to hold container colors
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       backgroundColor: AppColorResources.scaffoldBgColor,
-//       body: GetBuilder<VideoEditingController>(
-//         init: VideoEditingController(),
-//         builder: (controller) {
-//           final videoController = controller.videoController;
-//           final pickImage = controller.pickImage;
-//           print('check image path -----------$pickImage');
-//
-//           return Column(
-//             mainAxisAlignment: MainAxisAlignment.end,
-//             children: [
-//               Expanded(
-//                 child: Container(
-//                   child: videoController != null
-//                       ? AspectRatio(
-//                     aspectRatio: videoController.value.aspectRatio,
-//                     child: VideoPlayer(videoController),
-//                   )
-//                       : pickImage != null
-//                       ? Container(
-//                     child: pickImage,
-//                   )
-//                       : SizedBox.shrink(),
-//                 ),
-//               ),
-//               Container(
-//                 color: Colors.black87,
-//                 height: 65,
-//                 width: double.infinity,
-//                 child: SingleChildScrollView(
-//                   scrollDirection: Axis.horizontal,
-//                   child: Row(
-//                     children: [
-//                       BottomNavBarWidget(
-//                         iconData: Icons.text_fields,
-//                         onTap: () {
-//                           updateSelectedContainer(0);
-//                         },
-//                         onColorChange: (color) {
-//                           setState(() {
-//                             containerColors[0] = color; // Update the container color
-//                           });
-//                         },
-//                         index: 0, onSelectionChange: (int value) {  },
-//                       ),
-//                       BottomNavBarWidget(
-//                         iconData: Icons.music_note_sharp,
-//                         onTap: () {
-//                           updateSelectedContainer(1);
-//                         },
-//                         onColorChange: (color) {
-//                           setState(() {
-//                             containerColors[1] = color; // Update the container color
-//                           });
-//                         },
-//                         index: 1, onSelectionChange: (int value) {  },
-//                       ),
-//                       // Add other BottomNavBarWidget items with their own onTap and onColorChange callbacks
-//                     ],
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           );
-//         },
-//       ),
-//     );
-//   }
-//
-//   void updateSelectedContainer(int index) {
-//     if (selectedContainerIndex == index) {
-//       setState(() {
-//         selectedContainerIndex = -1; // Deselect the container
-//       });
-//     } else {
-//       setState(() {
-//         selectedContainerIndex = index; // Update the selected container index
-//       });
-//     }
-//
-//     // Reset container colors
-//     setState(() {
-//       containerColors = List.filled(containerColors.length, Colors.transparent);
-//     });
-//
-//     // Update the color of the selected container
-//     if (selectedContainerIndex != -1) {
-//       setState(() {
-//         containerColors[selectedContainerIndex] = Colors.blue;
-//       });
-//     }
-//   }
-// }
+

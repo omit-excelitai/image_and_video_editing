@@ -50,6 +50,8 @@ dependencies:
   open_file: ^3.3.2
   audioplayers: ^4.1.0
   image_cropper: ^4.0.1
+  emoji_picker_flutter: ^1.6.1
+  gestures: ^1.0.0
 
 dev_dependencies:
   flutter_test:
