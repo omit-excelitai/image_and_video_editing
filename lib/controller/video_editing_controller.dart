@@ -10,6 +10,7 @@ class VideoEditingController extends GetxController {
   dynamic pickImage;
   dynamic pickedFileX;
   List<String> selectedEmojis = [];
+  List<Offset> emojiPositions = []; // List to store the positions of emojis
 
   ///..................previous right code ..............
   // /// For Pick Image or Video

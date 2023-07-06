@@ -122,6 +122,23 @@ class _EditScreenState extends State<EditScreen> {
 
   ///.......emoji...............................
 
+  // void openEmojiPicker() {
+  //   showModalBottomSheet(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return EmojiPicker(
+  //         onEmojiSelected: (Category? category, Emoji emoji) {
+  //           setState(() {
+  //             videoEditingController.selectedEmojis.add(emoji.emoji);
+  //             Navigator.pop(context); // Close the emoji picker
+  //           });
+  //         },
+  //
+  //       );
+  //     },
+  //   );
+  // }
+
   void openEmojiPicker() {
     showModalBottomSheet(
       context: context,
@@ -130,6 +147,7 @@ class _EditScreenState extends State<EditScreen> {
           onEmojiSelected: (Category? category, Emoji emoji) {
             setState(() {
               videoEditingController.selectedEmojis.add(emoji.emoji);
+              videoEditingController..emojiPositions.add(Offset(0, 0)); // Initial position
               Navigator.pop(context); // Close the emoji picker
             });
           },
@@ -189,64 +207,152 @@ class _EditScreenState extends State<EditScreen> {
       /// Body
       body: GetBuilder<VideoEditingController>(
           init: VideoEditingController(),
-
-
-          ///......multipule emoji select...
         builder: (controller) {
           final videoController = controller.videoController;
           print('check image path -----------${controller.pickedFileX}');
 
+
           return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Transform.rotate(
-                  angle: rotationAngle,
-                  child: Container(
-                    child: videoController != null
-                        ? AspectRatio(
-                      aspectRatio: videoController.value.aspectRatio,
-                      child: VideoPlayer(videoController),
-                    )
-                        : controller.pickImage != null
-                        ? Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        controller.pickImage,
-                        Column(
-                          children: controller.selectedEmojis.map((emoji) {
-                            return Text(
-                              emoji,
-                              style: TextStyle(fontSize: 50),
-                            );
-                          }).toList(),
-                        ),
-                      ],
-                    )
-                        : SizedBox.shrink(),
+            child: Container(
+              height: 300,
+              width: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Transform.rotate(
+                      angle: rotationAngle,
+                      child: Container(
+                        child: videoController != null
+                            ? AspectRatio(
+                          aspectRatio: 16 / 9, // Replace with the desired aspect ratio
+                          child: Container(
+                            child: VideoPlayer(videoController),
+                          ),
+                        )
+                            : controller.pickImage != null
+                            ? GestureDetector(
+                          // Wrap the Stack with GestureDetector
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              controller.pickImage,
+                              Stack(
+                                children: [
+                                  // Emojis positioned freely on the image
+                                  for (int i = 0; i < controller.selectedEmojis.length; i++)
+                                    Positioned(
+                                      left: controller.emojiPositions[i].dx,
+                                      top: controller.emojiPositions[i].dy,
+                                      child: Draggable(
+                                        onDraggableCanceled: (_, offset) {
+                                          // Update emoji position based on drag
+                                          // controller.emojiPositions[i] = offset; // Remove this line
+                                        },
+                                        onDragUpdate: (details) {
+                                          // Update emoji position continuously while dragging
+                                          setState(() {
+                                            controller.emojiPositions[i] += details.delta;
+                                          });
+                                        },
+                                        child: Text(
+                                          controller.selectedEmojis[i],
+                                          style: TextStyle(fontSize: 50),
+                                        ),
+                                        feedback: Text(
+                                          controller.selectedEmojis[i],
+                                          style: TextStyle(fontSize: 50, color: Colors.transparent),
+                                        ),
+                                        childWhenDragging: Container(),
+                                      ),
+                                    ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        )
+                            : SizedBox.shrink(),
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                IconButton(
-                  icon: isPlaying
-                      ? Icon(Icons.pause)
-                      : Icon(Icons.play_arrow),
-                  onPressed: () {
-                    if (isPlaying) {
-                      pauseAudio();
-                    } else {
-                      playMusic();
-                    }
-                  },
-                  iconSize: 50.0,
-                  color: Colors.blue,
-                ),
-              ],
+                  SizedBox(
+                    height: 10,
+                  ),
+                  IconButton(
+                    icon: isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+                    onPressed: () {
+                      if (isPlaying) {
+                        pauseAudio();
+                      } else {
+                        playMusic();
+                      }
+                    },
+                    iconSize: 50.0,
+                    color: Colors.blue,
+                  ),
+                ],
+              ),
             ),
           );
+
         }),
+
+        ///......multipule emoji select...
+        // builder: (controller) {
+        //   final videoController = controller.videoController;
+        //   print('check image path -----------${controller.pickedFileX}');
+        //
+        //   return SingleChildScrollView(
+        //     child: Column(
+        //       mainAxisAlignment: MainAxisAlignment.start,
+        //       children: [
+        //         Transform.rotate(
+        //           angle: rotationAngle,
+        //           child: Container(
+        //             child: videoController != null
+        //                 ? AspectRatio(
+        //               aspectRatio: videoController.value.aspectRatio,
+        //               child: VideoPlayer(videoController),
+        //             )
+        //                 : controller.pickImage != null
+        //                 ? Stack(
+        //               alignment: Alignment.center,
+        //               children: [
+        //                 controller.pickImage,
+        //                 Column(
+        //                   children: controller.selectedEmojis.map((emoji) {
+        //                     return Text(
+        //                       emoji,
+        //                       style: TextStyle(fontSize: 50),
+        //                     );
+        //                   }).toList(),
+        //                 ),
+        //               ],
+        //             )
+        //                 : SizedBox.shrink(),
+        //           ),
+        //         ),
+        //         SizedBox(
+        //           height: 10,
+        //         ),
+        //         IconButton(
+        //           icon: isPlaying
+        //               ? Icon(Icons.pause)
+        //               : Icon(Icons.play_arrow),
+        //           onPressed: () {
+        //             if (isPlaying) {
+        //               pauseAudio();
+        //             } else {
+        //               playMusic();
+        //             }
+        //           },
+        //           iconSize: 50.0,
+        //           color: Colors.blue,
+        //         ),
+        //       ],
+        //     ),
+        //   );
+        // }),
 
 
 
